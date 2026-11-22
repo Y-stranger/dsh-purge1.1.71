@@ -1,0 +1,17 @@
+name: 纯净搬运Releases
+
+on:
+  workflow_dispatch: # 支持你手动点击运行
+  schedule:
+    - cron: '20 16 * * *' # 每天北京时间 0:20 自动运行
+
+jobs:
+  clone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 搬运 Releases
+        uses: andrewthetechie/gha-clone-releases@v1
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          src_repo: ZXEB/dsh-purge # 你的目标上游
+          copy_assets: true # 连同下载包一起搬
